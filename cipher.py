@@ -1,28 +1,22 @@
 # NSA "Diana" cipher
 # using "autokey" algorithm
 
-# To use a different Tabula rasa, modify alpha1, alpha2, alpha3 
-alpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-alpha2 = "ZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCBA"
-alpha3 = "AZYXWVUTSRQPONMLKJIHGFEDCBAZYXWVUTSRQPONMLKJIHGFEDCB"
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def formatstr(text):
     """Extract all letters from a string and make them uppercase"""
     return "".join([t.upper() for t in text if t.isalpha()])
 
-def multindex(text, query):
-    """Returns all indices of a given character in a string"""
-    return [i for i, e in enumerate(text) if e == query]
+def getpos(inp):
+    """Find out what position a letter is in the alphabet"""
+    return alphabet.index(inp)
 
-def encode(pt="A", ct="A"):
-    """Given two letters, return the third in an NSA Diana trigram"""
-    pair = []
-    for i in multindex(alpha1, pt):
-        for j in multindex(alpha2, ct):
-            if i > j:
-                pair.append(i-j)
-    pair = min(pair)
-    return(alpha3[pair])
+def encode(pt='', ct=''):
+    """Vastly simplified DIANA algorithm"""
+    if (25 - getpos(pt) - getpos(ct)) < 0:
+        return alphabet[51 - getpos(pt) - getpos(ct)]
+    else:
+        return alphabet[25 - getpos(pt) - getpos(ct)]
 
 def get_terms():
     """Users input a message and key, then encrypt/decrypt."""
