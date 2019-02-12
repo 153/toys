@@ -1,0 +1,5 @@
+./cipher.py -- Python3 -- NSA's DIANA symmetric polyalphabetic cipher 
+./cipher.arc -- Arc Lisp -- NSA's DIANA symmetric polyalphabetic cipher
+
+DIANA explained: 
+https://rijmenants.blogspot.com/2017/10/a-fast-reciprocal-one-time-pad-table.html
